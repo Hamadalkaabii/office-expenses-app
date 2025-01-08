@@ -9,8 +9,8 @@ import React, { useState } from 'react';
 
       const handleSubmit = (e) => {
         e.preventDefault();
-        const authorizedUsers = process.env.REACT_APP_AUTHORIZED_USERS
-          ? process.env.REACT_APP_AUTHORIZED_USERS.split(',')
+        const authorizedUsers = import.meta.env.VITE_AUTHORIZED_USERS
+          ? import.meta.env.VITE_AUTHORIZED_USERS.split(',')
           : [];
 
         if (
