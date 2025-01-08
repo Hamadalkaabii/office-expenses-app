@@ -1,6 +1,6 @@
 import React from 'react';
 
-    function ExpensesTable({ data, onRemoveRow, totals }) {
+    function ExpensesTable({ data, onRemoveRow, totals, onEditCell }) {
       const columns = [
         'month',
         'stationeryExpenses',
@@ -47,7 +47,13 @@ import React from 'react';
               <tr key={row.id}>
                 <td>{index + 1}</td>
                 {columns.map((column) => (
-                  <td key={column}>{row[column]}</td>
+                  <td
+                    key={column}
+                    contentEditable
+                    onBlur={(e) => onEditCell(row.id, column, e.target.innerText)}
+                  >
+                    {row[column]}
+                  </td>
                 ))}
                 <td>{calculateRowTotal(row)}</td>
                 <td>
@@ -66,7 +72,12 @@ import React from 'react';
               {columns.slice(1).map((column) => (
                 <td key={column}>{totals[column] || '-'}</td>
               ))}
-              <td>{Object.values(totals).reduce((acc, val) => acc + (isNaN(val) ? 0 : val), 0)}</td>
+              <td>
+                {Object.values(totals).reduce(
+                  (acc, val) => acc + (isNaN(val) ? 0 : val),
+                  0,
+                )}
+              </td>
               <td></td>
             </tr>
           </tbody>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-    function AccountingTable({ data, onRemoveRow }) {
+    function AccountingTable({ data, onRemoveRow, onEditCell }) {
       return (
         <table>
           <thead>
@@ -21,14 +21,68 @@ import React from 'react';
             {data.map((row, index) => (
               <tr key={row.id}>
                 <td>{index + 1}</td>
-                <td>{row.date}</td>
-                <td>{row.projectName}</td>
-                <td>{row.category}</td>
-                <td>{row.description}</td>
-                <td>{row.modeOfPayment}</td>
-                <td>{row.debit}</td>
-                <td>{row.credit}</td>
-                <td>{row.balance}</td>
+                <td
+                  contentEditable
+                  onBlur={(e) => onEditCell(row.id, 'date', e.target.innerText)}
+                >
+                  {row.date}
+                </td>
+                <td
+                  contentEditable
+                  onBlur={(e) =>
+                    onEditCell(row.id, 'projectName', e.target.innerText)
+                  }
+                >
+                  {row.projectName}
+                </td>
+                <td
+                  contentEditable
+                  onBlur={(e) =>
+                    onEditCell(row.id, 'category', e.target.innerText)
+                  }
+                >
+                  {row.category}
+                </td>
+                <td
+                  contentEditable
+                  onBlur={(e) =>
+                    onEditCell(row.id, 'description', e.target.innerText)
+                  }
+                >
+                  {row.description}
+                </td>
+                <td
+                  contentEditable
+                  onBlur={(e) =>
+                    onEditCell(row.id, 'modeOfPayment', e.target.innerText)
+                  }
+                >
+                  {row.modeOfPayment}
+                </td>
+                <td
+                  contentEditable
+                  onBlur={(e) =>
+                    onEditCell(row.id, 'debit', e.target.innerText)
+                  }
+                >
+                  {row.debit}
+                </td>
+                <td
+                  contentEditable
+                  onBlur={(e) =>
+                    onEditCell(row.id, 'credit', e.target.innerText)
+                  }
+                >
+                  {row.credit}
+                </td>
+                <td
+                  contentEditable
+                  onBlur={(e) =>
+                    onEditCell(row.id, 'balance', e.target.innerText)
+                  }
+                >
+                  {row.balance}
+                </td>
                 <td>
                   <button
                     className="remove-button"
