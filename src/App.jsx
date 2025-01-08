@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
     import ExpensesTable from './ExpensesTable';
     import { v4 as uuidv4 } from 'uuid';
     import {
@@ -10,7 +10,6 @@ import React, { useState, useEffect } from 'react';
     } from 'react-router-dom';
     import AccountingTable from './AccountingTable';
     import LoginPage from './LoginPage';
-    import netlifyIdentity from 'netlify-identity-widget';
 
     function App() {
       const initialData = [
@@ -288,27 +287,9 @@ import React, { useState, useEffect } from 'react';
         },
       ]);
       const [isLoggedIn, setIsLoggedIn] = useState(false);
-      const [user, setUser] = useState(null);
-
-      useEffect(() => {
-        netlifyIdentity.init();
-      }, []);
-
-      useEffect(() => {
-        netlifyIdentity.on('login', (user) => {
-          setIsLoggedIn(true);
-          setUser(user);
-          netlifyIdentity.close();
-        });
-
-        netlifyIdentity.on('logout', () => {
-          setIsLoggedIn(false);
-          setUser(null);
-        });
-      }, []);
 
       const handleLogin = () => {
-        netlifyIdentity.open();
+        setIsLoggedIn(true);
       };
 
       const handleInputChange = (e) => {
@@ -405,11 +386,6 @@ import React, { useState, useEffect } from 'react';
                   </li>
                   <li>
                     <Link to="/accounting">Accounting Sheet</Link>
-                  </li>
-                  <li>
-                    <button onClick={() => netlifyIdentity.logout()}>
-                      Logout
-                    </button>
                   </li>
                 </ul>
               </nav>
